@@ -58,7 +58,9 @@ described below.
   
 #### TB
 
-* tb_1553_enc.vhd
+* tb_1553_enc.v
+* FUSESOC TARGETS: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
+  - sim
   
 ### fusesoc
 
