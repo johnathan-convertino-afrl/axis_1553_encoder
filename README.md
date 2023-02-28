@@ -59,10 +59,13 @@ described below.
 #### TB
 
 * tb_1553_enc.v
-* FUSESOC TARGETS: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
-  - sim
   
 ### fusesoc
 
 * fusesoc_info.core created.
 * Simulation uses icarus to run data through the core for a fixed amount of time, no verifcation of data in/out.
+
+#### TARGETS
+* RUN WITH: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
+  - default (for IP integration builds)
+  - sim
