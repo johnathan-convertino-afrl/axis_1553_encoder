@@ -12,7 +12,6 @@ filesets:
   tb:
     files:
       - tb/tb_1553_enc.v  : { file_type: verilogSource }
-      - tb/in.bin         : { file_type: user, copyto: in.bin }
     
   dep:
     depend:
@@ -21,6 +20,7 @@ filesets:
   dep_tb:
     depend:
       - AFRL:simulation:axis_stimulator
+      - AFRL:utility:sim_helper
     
 targets:
   default: &default

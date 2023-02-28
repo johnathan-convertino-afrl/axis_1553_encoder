@@ -35,6 +35,7 @@ module tb_1553;
   wire [1:0]  tb_dout;
   wire        tb_en_dout;
   wire [15:0] tb_tdata;
+  reg  [7:0]  tb_tuser;
   wire        tb_tvalid;
   wire        tb_tready;
   
@@ -47,7 +48,7 @@ module tb_1553;
     .BUS_WIDTH(2),
     .USER_WIDTH(8),
     .DEST_WIDTH(1),
-    .FILE("in.bin")
+    .FILE("8bit_count.bin")
   ) slave_axis_stim (
     // output to slave
     .m_axis_aclk(tb_data_clk),
@@ -58,7 +59,8 @@ module tb_1553;
     .m_axis_tkeep(),
     .m_axis_tlast(),
     .m_axis_tuser(),
-    .m_axis_tdest()
+    .m_axis_tdest(),
+    .eof()
   );
   
   //device under test
@@ -70,7 +72,7 @@ module tb_1553;
     //slave input
     .s_axis_tdata(tb_tdata),
     .s_axis_tvalid(tb_tvalid),
-    .s_axis_tuser(8'h81),
+    .s_axis_tuser(tb_tuser),
     .s_axis_tready(tb_tready),
     //diff output
     .diff(tb_dout),
@@ -78,8 +80,7 @@ module tb_1553;
   );
     
   //reset
-  initial
-  begin
+  initial begin
     tb_rst <= 1'b1;
     
     #RST_PERIOD;
@@ -88,18 +89,31 @@ module tb_1553;
   end
   
   //copy pasta, fst generation
-  initial
-  begin
+  initial begin
     $dumpfile("tb_1553_enc.fst");
     $dumpvars(0,tb_1553);
   end
   
   //clock
-  always
-  begin
+  always begin
     tb_data_clk <= ~tb_data_clk;
     
     #(CLK_PERIOD/2);
+  end
+  
+  //toggle user between data and command
+  always @(posedge tb_data_clk) begin
+    if(tb_rst == 1'b1) begin
+      tb_tuser <= 8'h81;
+    end else begin
+      // send command sync
+      tb_tuser <= 8'h81;
+      
+      // send data sync
+      if(^tb_tdata[7:0] == 1'b1) begin
+        tb_tuser <= 8'h41;
+      end
+    end
   end
   
   //copy pasta, no way to set runtime... this works in vivado as well.

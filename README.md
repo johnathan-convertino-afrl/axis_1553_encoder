@@ -1,12 +1,12 @@
 # AXIS 1553 ENCODER
-## AXIS TO MIL-STD-1553
+### AXIS TO MIL-STD-1553 bus.
 ---
 
    author: Jay Convertino   
    
    date: 2021.05.17  
    
-   details: Incoming AXI streaming data is used to create a MIL-STD-1553 compliant signal.   
+   details: Incoming AXI streaming data is used to populate a MIL-STD-1553 compliant signal.   
    
    license: MIT   
    
@@ -22,6 +22,7 @@
 #### Simulation
 
   - AFRL:simulation:axis_stimulator
+  - AFRL:utility:sim_helper
 
 ### IP USAGE
 #### INSTRUCTIONS
@@ -64,4 +65,4 @@ described below.
 ### fusesoc
 
 * fusesoc_info.core created.
-* Simulation uses icarus to run data through the core.
+* Simulation uses icarus to run data through the core for a fixed amount of time, no verifcation of data in/out.
