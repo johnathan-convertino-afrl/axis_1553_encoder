@@ -24,10 +24,12 @@ filesets:
     
 targets:
   default: &default
+  description: Default for IP intergration.
     filesets: [src, dep]
   
   sim:
     <<: *default
+    description: Simulation using icarus as the default.
     default_tool: icarus
     filesets_append: [tb, dep_tb]
     toplevel: tb_1553

@@ -12,6 +12,13 @@
    
 ---
 
+### Version
+#### Current
+  - V1.0.0 - initial release
+
+#### Previous
+  - none
+
 ### Dependencies
 #### Build
 
@@ -48,8 +55,8 @@ described below.
 
 #### PARAMETERS
 
-* clock_speed : DEFAULT = 2000000 : clock speed of aclk to the core in hz.
-* sample_rate : DEFAULT = 2000000 : sample rate of generated signal in hz (minimum 2 MHz).
+* CLOCK_SPEED : DEFAULT = 2000000 : clock speed of aclk to the core in hz.
+* SAMPLE_RATE : DEFAULT = 2000000 : sample rate of generated signal in hz (minimum 2 MHz).
 
 ### COMPONENTS
 #### SRC
@@ -66,6 +73,7 @@ described below.
 * Simulation uses icarus to run data through the core for a fixed amount of time, no verifcation of data in/out.
 
 #### TARGETS
+
 * RUN WITH: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
   - default (for IP integration builds)
   - sim
