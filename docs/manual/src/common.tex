@@ -50,7 +50,7 @@ Connect the device to your AXIS bus. TUSER is used to set various options such a
 
 \par
 TDATA input should contain the 16 bit data payload. TUSER is a 8 bit command register
-that takes a description what type of data it is (command or data) and other options.
+that takes a description what type of data it is (command or data) and other options
 described below.
 
 TUSER = {TYY,NA,D,I,P} (7 downto 0)
@@ -89,7 +89,7 @@ This core is made up of a single module.
 
 \subsection{Encoding Method}
 \par
-This core has 3 always blocks that are sensitive to the positive clock edge. They are
+This core has 4 always blocks that are sensitive to the positive clock edge. They are
 
 \begin{itemize}
 \item \textbf{pause counter} Inserts delays between transmits to comply with 4us spacing.

@@ -137,7 +137,7 @@ module axis_1553_encoder #(
   localparam enable_diff_output = 1'b1;
 
   // Group: State Machine
-  // Variables that makeup the encoder state machine.
+  // Constants that makeup the encoder state machine.
 
   // var: data_cap
   // data capture
