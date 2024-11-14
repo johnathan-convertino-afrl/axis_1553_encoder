@@ -3,8 +3,8 @@
 <!--Converted with LaTeX2HTML 2021.2 (Released July 1, 2021) -->
 <HTML lang="en">
 <HEAD>
-<TITLE>Building</TITLE>
-<META NAME="description" CONTENT="Building">
+<TITLE>Encoding Method</TITLE>
+<META NAME="description" CONTENT="Encoding Method">
 <META NAME="keywords" CONTENT="html">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -15,7 +15,6 @@
 
 <LINK REL="STYLESHEET" HREF="html.css">
 
-<LINK REL="next" HREF="axis_1553_encoder_node15.html">
 <LINK REL="previous" HREF="axis_1553_encoder_node7.html">
 <LINK REL="next" HREF="axis_1553_encoder_node9.html">
 </HEAD>
@@ -27,62 +26,118 @@
  HREF="axis_1553_encoder_node9.html">
 <IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
 <A
- HREF="html.html">
+ HREF="axis_1553_encoder_node7.html">
 <IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
 <A
  HREF="axis_1553_encoder_node7.html">
 <IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
-<A ID="tex2html55"
+<A ID="tex2html58"
   HREF="axis_1553_encoder_node1.html">
 <IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
 <BR>
 <B> Next:</B> <A
- HREF="axis_1553_encoder_node9.html">fusesoc</A>
+ HREF="axis_1553_encoder_node9.html">Building</A>
 <B> Up:</B> <A
- HREF="html.html">html</A>
+ HREF="axis_1553_encoder_node7.html">Architecture</A>
 <B> Previous:</B> <A
  HREF="axis_1553_encoder_node7.html">Architecture</A>
- &nbsp; <B>  <A ID="tex2html56"
+ &nbsp; <B>  <A ID="tex2html59"
   HREF="axis_1553_encoder_node1.html">Contents</A></B> 
 <BR>
 <BR></DIV>
 <!--End of Navigation Panel-->
 
-<H1><A ID="SECTION00040000000000000000">
-Building</A>
-</H1>
+<H2><A ID="SECTION00031000000000000000">
+Encoding Method</A>
+</H2>
 
 <P>
-The AXIS 1553 Encoder is written in Verilog 2001. It should synthesize in any modern FPGA software. The core comes as a fusesoc packaged core and can be
-included in any other core. Be sure to make sure you have meet the dependencies listed in the previous section.
+This core has 3 always blocks that are sensitive to the positive clock edge. They are
 
 <P>
-<BR><HR>
-<!--Table of Child-Links-->
-<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
-<UL CLASS="ChildLinks">
-<LI><A ID="tex2html57"
-  HREF="axis_1553_encoder_node9.html">fusesoc</A>
-<LI><A ID="tex2html58"
-  HREF="axis_1553_encoder_node10.html">Source Files</A>
 <UL>
-<LI><A ID="tex2html59"
-  HREF="axis_1553_encoder_node11.html">fusesoc_info File List</A>
+<LI><SPAN  CLASS="textbf">pause counter</SPAN> Inserts delays between transmits to comply with 4us spacing.
+</LI>
+<LI><SPAN  CLASS="textbf">axis data input</SPAN> Deals with AXIS bus input data to the core based on its current state.
+</LI>
+<LI><SPAN  CLASS="textbf">data processing</SPAN> In charge of the state machine and processing of input data to 1553 non-differential bitstream.
+</LI>
+<LI><SPAN  CLASS="textbf">differential data output</SPAN> Output processed data from a non-differential bitstream into a differential one.
+</LI>
 </UL>
-<BR>
-<LI><A ID="tex2html60"
-  HREF="axis_1553_encoder_node12.html">Targets</A>
+
+<P>
+Pause counter simply gets reset at each transmit state to its initial value. Then once it is out of the transmit state it starts its countdown.
+The data processing block checks the pause counter, if it is not 0 we will not transition to the transmit state.
+
+<P>
+AXIS data input does exactly as it says. Take input data in the data capture state and register it. All other states simply ignore the input data.
+
+<P>
+Data processing block does most of the work. It is in charge of the state machine state and generating the 1553 non-differential bitstream. Essentially
+the state machine does the following:
+
+<OL>
+<LI>Startup in error state, which does to the default handler that puts it into data capture.
+</LI>
+<LI>Wait for data input from the AXIS streaming input, once valid data is input. Then go to the data invert state.
+</LI>
+<LI>Check the TUSER command if a data invert is necessary. Always go to the parity generation state.
+</LI>
+<LI>Generate parity bit based upon the input data using xor method. Then move on to process state.
+</LI>
+<LI>In process state take the TUSER and TDATA input and process it into register. This register will contain a non-differential 1553 bitstream.
+  
 <UL>
-<LI><A ID="tex2html61"
-  HREF="axis_1553_encoder_node13.html">fusesoc_info Targets</A>
+<LI>Check if pause check is enabled, if it isn't skip it.
+</LI>
+<LI>Based on TUSER insert the needed sync pulse of command or data. 0 is inserted if a invalid selection is made.
+</LI>
+<LI>Check parity option for odd or even and insert parity bit based upon selection and generated parity bit.
+</LI>
+<LI>Generate machester data using XOR method, this is done with a synthetic clock xor with the input data over the number of samples needed. The sythetic clock is contained in the register used for the result.
+  
+</LI>
 </UL>
+</LI>
+<LI>Check for pause (if it wasn't skipped) when counter is 0, move to transmit state.
+</LI>
+<LI>In transmit state wait for differential data output to process all of the register data. Once all conditions are meet, move to the data capture state to wait for more input data to encode.
+</LI>
+</OL>
+
+<P>
+Differential data output waits for the transmit state, once it is reached the core will begin outputing the registered data generated by data processing in the process state. It will output a TTL
+differential version of the data and keep enable diff high so a mux can be switched for transmit mode. Once the data, and by extension counters, are exhausted the block will wait for the next time
+transmit state is reached.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="axis_1553_encoder_node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="axis_1553_encoder_node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="axis_1553_encoder_node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html58"
+  HREF="axis_1553_encoder_node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
 <BR>
-<LI><A ID="tex2html62"
-  HREF="axis_1553_encoder_node14.html">Directory Guide</A>
-</UL>
-<!--End of Table of Child-Links-->
-<BR><HR>
+<B> Next:</B> <A
+ HREF="axis_1553_encoder_node9.html">Building</A>
+<B> Up:</B> <A
+ HREF="axis_1553_encoder_node7.html">Architecture</A>
+<B> Previous:</B> <A
+ HREF="axis_1553_encoder_node7.html">Architecture</A>
+ &nbsp; <B>  <A ID="tex2html59"
+  HREF="axis_1553_encoder_node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
 
 </BODY>
 </HTML>
