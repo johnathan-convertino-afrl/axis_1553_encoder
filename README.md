@@ -1,5 +1,8 @@
 # AXIS 1553 ENCODER
 ### AXIS TO MIL-STD-1553 bus.
+
+![image](docs/manual/img/AFRL.png)
+
 ---
 
    author: Jay Convertino   
@@ -19,7 +22,13 @@
 #### Previous
   - none
 
-### Dependencies
+### DOCUMENTATION
+  For detailed usage information, please navigate to one of the following sources. They are the same, just in a different format.
+
+  - [axis_1553_encoder.pdf](docs/manual/axis_1553_encoder.pdf)
+  - [github page](https://johnathan-convertino-afrl.github.io/axis_1553_encoder/)
+
+### DEPENDENCIES
 #### Build
 
   - AFRL:utility:helper:1.0.0
@@ -29,31 +38,7 @@
   - AFRL:simulation:axis_stimulator
   - AFRL:utility:sim_helper
 
-### IP USAGE
-#### INSTRUCTIONS
-
-TDATA input should contain the 16 bit data payload. TUSER is a 8 bit command register   
-that takes a discription what type of data it is (command or data) and other options.   
-described below.   
-
-* TUSER = {TYY,NA,D,I,P} (7 downto 0)
-  * TYY = TYPE OF DATA
-    * 000 N/A
-    * 001 REG (NOT IMPLIMENTED)
-    * 010 DATA
-    * 100 CMD/STATUS
-  * NA = RESERVED FOR FUTURE USE.
-  * D = DELAY ENABLED
-    * 1 = 4 us delay enabled.
-    * 0 = no delay between transmissions.
-  * I = INVERT DATA
-    * 1 = Invert data.
-    * 0 = Normal data.
-  * P = PARITY
-    * 1 = ODD
-    * 0 = EVEN
-
-#### PARAMETERS
+### PARAMETERS
 
 * CLOCK_SPEED : DEFAULT = 2000000 : clock speed of aclk to the core in hz.
 * SAMPLE_RATE : DEFAULT = 2000000 : sample rate of generated signal in hz (minimum 2 MHz).
@@ -67,12 +52,12 @@ described below.
 
 * tb_1553_enc.v
   
-### fusesoc
+### FUSESOC
 
 * fusesoc_info.core created.
 * Simulation uses icarus to run data through the core for a fixed amount of time, no verifcation of data in/out.
 
-#### TARGETS
+#### Targets
 
 * RUN WITH: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
   - default (for IP integration builds)

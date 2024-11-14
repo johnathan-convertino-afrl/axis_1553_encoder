@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("dat",["Variable"],[["data_cap",,[["axis_1553_encoder",,,,0,"File:axis_1553_encoder.v:axis_1553_encoder.data_cap","SystemVerilogModule:axis_1553_encoder:data_cap"]]],["data_invert",,[["axis_1553_encoder",,,,0,"File:axis_1553_encoder.v:axis_1553_encoder.data_invert","SystemVerilogModule:axis_1553_encoder:data_invert"]]]]);

@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("cyc",["Variable"],[["cycles_per_mhz",,[["axis_1553_encoder",,,,0,"File:axis_1553_encoder.v:axis_1553_encoder.cycles_per_mhz","SystemVerilogModule:axis_1553_encoder:cycles_per_mhz"]]]]);

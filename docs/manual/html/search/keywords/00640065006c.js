@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("del",["Variable"],[["delay_time",,[["axis_1553_encoder",,,,0,"File:axis_1553_encoder.v:axis_1553_encoder.delay_time","SystemVerilogModule:axis_1553_encoder:delay_time"]]]]);

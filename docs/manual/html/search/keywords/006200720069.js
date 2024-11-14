@@ -1,0 +1,1 @@
+﻿NDSearch.OnPrefixDataLoaded("bri",["Information"],[["Brief",,[[,,,,0,"File:axis_1553_encoder.v:Brief"]]]]);

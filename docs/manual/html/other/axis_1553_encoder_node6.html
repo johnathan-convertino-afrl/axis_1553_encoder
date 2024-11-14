@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021.2 (Released July 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>In a Project</TITLE>
+<META NAME="description" CONTENT="In a Project">
+<META NAME="keywords" CONTENT="html">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021.2">
+
+<LINK REL="STYLESHEET" HREF="html.css">
+
+<LINK REL="previous" HREF="axis_1553_encoder_node4.html">
+<LINK REL="next" HREF="axis_1553_encoder_node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="axis_1553_encoder_node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="axis_1553_encoder_node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="axis_1553_encoder_node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html51"
+  HREF="axis_1553_encoder_node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="axis_1553_encoder_node7.html">Architecture</A>
+<B> Up:</B> <A
+ HREF="axis_1553_encoder_node2.html">Usage</A>
+<B> Previous:</B> <A
+ HREF="axis_1553_encoder_node5.html">fusesoc_info Depenecies</A>
+ &nbsp; <B>  <A ID="tex2html52"
+  HREF="axis_1553_encoder_node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00023000000000000000">
+In a Project</A>
+</H2>
+
+<P>
+Connect the device to your AXIS bus. TUSER is used to set various options such as command/data packet mode.
+
+<P>
+TDATA input should contain the 16 bit data payload. TUSER is a 8 bit command register
+that takes a discription what type of data it is (command or data) and other options.
+described below.
+
+<P>
+TUSER = TYY,NA,D,I,P (7 downto 0)
+
+<UL>
+<LI>TYY = TYPE OF DATA
+  
+<UL>
+<LI>000 N/A
+</LI>
+<LI>001 REG (NOT IMPLIMENTED)
+</LI>
+<LI>010 DATA
+</LI>
+<LI>100 CMD/STATUS
+  
+</LI>
+</UL>
+</LI>
+<LI>NA = RESERVED FOR FUTURE USE.
+</LI>
+<LI>D = DELAY ENABLED
+  
+<UL>
+<LI>1 = 4 us delay enabled.
+</LI>
+<LI>0 = no delay between transmissions.
+  
+</LI>
+</UL>
+</LI>
+<LI>I = INVERT DATA
+  
+<UL>
+<LI>1 = Invert data.
+</LI>
+<LI>0 = Normal data.
+  
+</LI>
+</UL>
+</LI>
+<LI>P = PARITY
+  
+<UL>
+<LI>1 = ODD
+</LI>
+<LI>0 = EVEN
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>
