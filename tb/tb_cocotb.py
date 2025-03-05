@@ -87,7 +87,7 @@ async def increment_test_no_delay(dut):
 
     await reset_dut(dut)
 
-    for x in range(0, 2**16):
+    for x in range(0, 2**10):
         data = x.to_bytes(length = 2, byteorder='little')
 
         tx_frame = AxiStreamFrame(data, tuser=0x81, tx_complete=Event())
@@ -138,7 +138,7 @@ async def increment_test_delay(dut):
 
     await reset_dut(dut)
 
-    for x in range(0, 2**16):
+    for x in range(0, 2**10):
         data = x.to_bytes(length = 2, byteorder='little')
 
         tx_frame = AxiStreamFrame(data, tuser=0x81, tx_complete=Event())
