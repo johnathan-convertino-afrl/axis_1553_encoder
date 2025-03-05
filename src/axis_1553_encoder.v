@@ -50,7 +50,7 @@
  *   arstn          - Negative reset
  *   s_axis_tdata   - Input data for 1553 encoder.
  *   s_axis_tvalid  - When set active high the input data is valid.
- *   s_axis_tuser   - Information about the AXIS data {TYY,NA,I,P}
+ *   s_axis_tuser   - Information about the AXIS data {TYY,NA,D,I,P}
  *
  *                    Bits explained below:
  *                  --- Code
