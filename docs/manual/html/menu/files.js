@@ -1,1 +1,1 @@
-﻿NDMenu.OnSectionLoaded("files.js",[[1,"axis_1553_encoder.v"]]);
+﻿NDMenu.OnSectionLoaded("files.js",[[2,"axis_1553_encoder","File:",[[1,"axis_1553_encoder.v"]]],[2,"tb_axis_1553_encoder","File2:",[[1,"tb_cocotb.py"],[1,"tb_cocotb.v"]]]]);

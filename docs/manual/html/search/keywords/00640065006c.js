@@ -1,1 +1,1 @@
-﻿NDSearch.OnPrefixDataLoaded("del",["Variable"],[["delay_time",,[["axis_1553_encoder",,,,0,"File:axis_1553_encoder.v:axis_1553_encoder.delay_time","SystemVerilogModule:axis_1553_encoder:delay_time"]]]]);
+﻿NDSearch.OnPrefixDataLoaded("del",["Function","Variable"],[["delay",,[[,"increment test delay",,,0,"File2:tb_cocotb.py:increment_test_delay"],[,"increment test no delay",,,0,"File2:tb_cocotb.py:increment_test_no_delay"]]],["delay_time",,[["axis_1553_encoder",,,,1,"File:axis_1553_encoder.v:axis_1553_encoder.delay_time","SystemVerilogModule:axis_1553_encoder:delay_time"]]]]);

@@ -178,7 +178,19 @@ iverilog is used for simple test benches for quick verification, visually, of th
 
 \subsection{cocotb}
 \par
-Future simulations will use cocotb. This feature is not yet implemented.
+To use the cocotb tests you must install the following python libraries.
+\begin{lstlisting}[language=bash]
+  $ pip install cocotb
+  $ pip install cocotbext-axi
+  $ pip install cocotbext-mil_std_1553
+\end{lstlisting}
+
+Then you must use the cocotb sim target. The targets above can be run with various bus and fifo parameters.
+
+\begin{lstlisting}[language=bash]
+  $ fusesoc run --target sim_cocotb AFRL:device_converter:axis_1553_encoder:1.0.0
+\end{lstlisting}
+
 
 \newpage
 

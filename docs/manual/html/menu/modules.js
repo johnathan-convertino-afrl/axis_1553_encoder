@@ -1,1 +1,1 @@
-﻿NDMenu.OnSectionLoaded("modules.js",[[1,"axis_1553_encoder"]]);
+﻿NDMenu.OnSectionLoaded("modules.js",[[1,"axis_1553_encoder"],[1,"dut"],[1,"tb_cocotb"]]);
