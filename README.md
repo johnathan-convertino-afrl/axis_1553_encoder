@@ -40,8 +40,8 @@
 
 ### PARAMETERS
 
-* CLOCK_SPEED : DEFAULT = 2000000 : clock speed of aclk to the core in hz.
-* SAMPLE_RATE : DEFAULT = 2000000 : sample rate of generated signal in hz (minimum 2 MHz).
+* CLOCK_SPEED : DEFAULT = 200000000 : clock speed of aclk to the core in hz.
+* SAMPLE_RATE : DEFAULT = 2000000   : sample rate of generated signal in hz (minimum 2 MHz).
 
 ### COMPONENTS
 #### SRC
@@ -51,6 +51,8 @@
 #### TB
 
 * tb_1553_enc.v
+* tb_cocotb.py
+* tb_cocotb.v
   
 ### FUSESOC
 
@@ -60,5 +62,5 @@
 #### Targets
 
 * RUN WITH: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
-  - default (for IP integration builds)
-  - sim
+  - default (
+  - sim_cocotb
