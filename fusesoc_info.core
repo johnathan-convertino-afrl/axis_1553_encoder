@@ -31,6 +31,16 @@ targets:
   default: &default
     description: Default for IP intergration.
     filesets: [src, dep]
+    
+  lint:
+    description: Lint with Verible
+    toplevel: axis_1553_encoder
+    filesets: [src]
+    default_tool: veriblelint
+    tools:
+      veriblelint:
+        rules:
+         - "-explicit-parameter-storage-type,-parameter-name-style,-line-length,-no-trailing-spaces"
   
   sim:
     <<: *default

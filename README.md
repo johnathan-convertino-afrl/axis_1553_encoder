@@ -5,14 +5,19 @@
 
 ---
 
-   author: Jay Convertino   
-   
-   date: 2021.05.17  
-   
-   details: Incoming AXI streaming data is used to populate a MIL-STD-1553 compliant signal.   
-   
-   license: MIT   
-   
+  author: Jay Convertino   
+  
+  date: 2021.05.17  
+  
+  details: Incoming AXI streaming data is used to populate a MIL-STD-1553 compliant signal.   
+  
+  license: MIT   
+  
+  Actions:  
+
+  [![Lint Status](../../actions/workflows/lint.yml/badge.svg)](../../actions)  
+  [![Manual Status](../../actions/workflows/manual.yml/badge.svg)](../../actions)  
+  
 ---
 
 ### Version
@@ -27,16 +32,6 @@
 
   - [axis_1553_encoder.pdf](docs/manual/axis_1553_encoder.pdf)
   - [github page](https://johnathan-convertino-afrl.github.io/axis_1553_encoder/)
-
-### DEPENDENCIES
-#### Build
-
-  - AFRL:utility:helper:1.0.0
-  
-#### Simulation
-
-  - AFRL:simulation:axis_stimulator
-  - AFRL:utility:sim_helper
 
 ### PARAMETERS
 
@@ -62,5 +57,6 @@
 #### Targets
 
 * RUN WITH: (fusesoc run --target=sim VENDER:CORE:NAME:VERSION)
-  - default (
+  - default
+  - lint
   - sim_cocotb

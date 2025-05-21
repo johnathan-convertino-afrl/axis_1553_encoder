@@ -227,6 +227,8 @@ module axis_1553_encoder #(
           data <= 0;
           cmd  <= 0;
         end
+        default: begin
+        end
       endcase
     end
   end
